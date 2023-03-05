@@ -26,6 +26,7 @@ class Percentage(Perc):
 def unpacked() -> Tuple(str):
     cwd = os.getcwd()
     archive_files = glob(cwd + '/' + '*.zip')
+    whatsapp_archive = None
     
     for file in archive_files:
         if 'whatsapp' in file.lower():
@@ -33,7 +34,7 @@ def unpacked() -> Tuple(str):
 
     if not whatsapp_archive:
         print('File archive WhatsApp not found')
-        return
+        return None, None
     
     extract_dir = cwd + "/temp_data"
     shutil.unpack_archive(whatsapp_archive, extract_dir)
@@ -143,8 +144,9 @@ def run(whatsapp_extract_dir: str) -> str:
 
 def main() -> None:
     whatsapp_extract_dir, result_file_name = unpacked()
-    result_txt = run(whatsapp_extract_dir)
-    convert_to_docx(result_txt, whatsapp_extract_dir, result_file_name)
+    if whatsapp_extract_dir:
+        result_txt = run(whatsapp_extract_dir)
+        convert_to_docx(result_txt, whatsapp_extract_dir, result_file_name)
     
 
 if __name__ == '__main__':
