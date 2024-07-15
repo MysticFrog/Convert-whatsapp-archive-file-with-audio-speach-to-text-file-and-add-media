@@ -1,9 +1,7 @@
 #requirement. to enable Windows long path support
 #https://pip.pypa.io/warnings/enable-long-paths
-#do
 #python -m pip install --upgrade pip setuptools wheel
-#python -m pip install --upgrade emoji certifi cffi charset-normalizer ffmpeg-python filelock future huggingface-hub idna lxml more-itertools numpy nvidia-cublas-cu11 urllib3, typing-extensions, pyyaml, pycparser, packaging, nvidia-cublas-cu11, numpy, more-itertools, lxml, idna, future, fsspec, filelock, colorama, charset-normalizer, certifi, tqdm, requests, ffmpeg-python, cffi, huggingface-hub
-
+#python -m pip install --upgrade emoji certifi cffi charset-normalizer ffmpeg-python filelock future huggingface-hub idna lxml more-itertools numpy nvidia-cublas-cu11 nvidia-cuda-nvrtc-cu11 nvidia-cuda-runtime-cu11 nvidia-cudnn-cu11 openai-whisper packaging Pillow progressbar pycparser pydub python-docx PyYAML regex requests srt tokenizers torch tqdm transformers typing_extensions urllib3 vosk websockets 
 
 import os
 import re
@@ -73,7 +71,7 @@ def convert_to_docx(file_name_txt: str, whatsapp_extract_dir: str, result_file_n
                 else:
                     document.add_paragraph(i)
         
-        document.save(result_file_name + '.docx') #file path doubled up. result_file_name contains os.cwp
+        document.save(os.getcwd() + '/' + result_file_name + '.docx')
 
     os.remove(file_name_txt)
     shutil.rmtree(whatsapp_extract_dir)
